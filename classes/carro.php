@@ -7,11 +7,8 @@ require_once("classes/Database.php");
 // Pega a instância unica do banco
 $con = $db->getDatabase();
 
-// Pega o id do pacote
-$id_pacote = $_GET["pacote"];
-
 // Pega o id do pacote ou define como inválido
-$id_pacote = $_GET["pacote"] ?? PACOTE_INVALIDO;
+$id_pacote = $_GET["pacote_id"] ?? PACOTE_INVALIDO;
 
 // Redireciona caso seja invalido
 if ($id_pacote === PACOTE_INVALIDO) {
