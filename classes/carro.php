@@ -12,7 +12,7 @@ $id_pacote = $_GET["pacote_id"] ?? PACOTE_INVALIDO;
 
 // Redireciona caso seja invalido
 if ($id_pacote === PACOTE_INVALIDO) {
-    header("Location: index.php");
+    header("Location: pacote.php");
 }
 
 // Faz uma query para buscar no banco o tipo de carro no pacote
