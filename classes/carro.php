@@ -15,22 +15,8 @@ if ($id_pacote === PACOTE_INVALIDO) {
     header("Location: pacote.php");
 }
 
-// Faz uma query para buscar no banco o tipo de carro no pacote
-$query = $con->query("SELECT id_tipo FROM pacote WHERE id = ?");
-$query->bindParam(1, $id_pacote);
-$query->execute();
-
-if ($query->rowCount() < 1) {
-    header("Location: pacote.php");
-}
-
-$tipo_carro = $query->fetch(PDO::FETCH_OBJ);
-
-$tipo_carro_id = $tipo_carro->id_tipo;
-
 // Faz uma query para buscar no banco o carro
-$query = $con->query("SELECT id,nome FROM carro WHERE id_tipo = ?");
-$query->bindParam(1, $tipo_carro_id);
+$query = $con->query("SELECT c.id,c.nome FROM carro AS c INNER JOIN pacote AS p ON c.id_tipo = p.id_tipo");
 $query->execute();
 
 if ($query->rowCount() < 1) {
