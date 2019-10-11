@@ -30,19 +30,19 @@ CREATE TABLE `periodo` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `tipo_carro` (
-    `id` int(99) NOT NULL AUTO_INCREMENT,
+    `id` int(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `nome` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `carro` (
-    `id` int(99) NOT NULL AUTO_INCREMENT,
+    `id` int(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `nome` varchar(50) NOT NULL,
     `id_tipo`int(99) NOT NULL,
     CONSTRAINT fk_carro_tipo FOREIGN KEY (id_tipo) REFERENCES tipo_carro (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `pacote` (
-    `id` int(99) NOT NULL AUTO_INCREMENT,
+    `id` int(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `nome` varchar(50) NOT NULL,
     `valor` varchar(50) NOT NULL,
     `id_tipo` int(99) NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE `pacote` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `pacote_cliente` (
-    `id` int(99) NOT NULL AUTO_INCREMENT,
+    `id` int(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `id_pacote` int(99) NOT NULL,
     `id_cliente` int(99) NOT NULL,
     `id_carro` int(99) NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE `pacote_cliente` (
 
 
 CREATE TABLE `cliente` (
-    `id` int(99) NOT NULL AUTO_INCREMENT,
+    `id` int(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `nome` varchar(50) NOT NULL,
     `email` varchar(25) NOT NULL,
     `cpf` varchar(11) NOT NULL,
