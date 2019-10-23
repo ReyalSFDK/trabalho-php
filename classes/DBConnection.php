@@ -30,20 +30,17 @@
 Class DBConnection {
     // Database Connection Configuration Parameters
     // array('driver' => 'mysql','host' => '','dbname' => '','username' => '','password' => '')
-    protected $_config = [
-        'driver' => 'mysql',
-        'host' => 'localhost',
-        'dbname' => 'fdk_db',
-        'username' => 'root',
-        'password' => ''
-    ];
+    protected $_config = [];
+
     // Database Connection
     public $dbc;
+
     /* function __construct
      * Opens the database connection
      * @param $config is an array of database connection parameters
      */
-    public function __construct() {
+    public function __construct(array $config) {
+        $this->_config = $config;
         $this->getPDOConnection();
     }
     /* Function __destruct
