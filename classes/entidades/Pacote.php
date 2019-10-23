@@ -1,4 +1,4 @@
-<?
+<?php
 class Pacote {
     /**
      * @var string | null
@@ -56,7 +56,7 @@ class Pacote {
         $pacote->setNome($databaseData->nome);
 
         if ($databaseData->id) {
-            $this->id = $databaseData->id;
+            $pacote->id = $databaseData->id;
         }
 
         return $pacote;

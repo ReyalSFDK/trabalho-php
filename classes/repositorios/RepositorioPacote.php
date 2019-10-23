@@ -1,9 +1,9 @@
-<?
+<?php
 // Includes
-require_once("./RepositorioBase.php");
+require_once("RepositorioBase.php");
 
 // Entidades
-require_once("../entidades/Pacote.php");
+require_once("classes/entidades/Pacote.php");
 
 class RepositorioCarro extends RepositorioBase{
 

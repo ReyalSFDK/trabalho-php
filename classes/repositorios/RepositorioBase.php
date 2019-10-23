@@ -1,11 +1,11 @@
-<?
+<?php
 // Includes
-require_once("../DBConnection.php");
+require_once("classes/DBConnection.php");
 
 abstract class RepositorioBase {
-    protected $dbConnection;
+    public $dbConnection;
 
-    public function __constructor(DBConnection $dbConnection) {
+    public function __construct(DBConnection $dbConnection) {
         $this->dbConnection = $dbConnection;
     }
 }

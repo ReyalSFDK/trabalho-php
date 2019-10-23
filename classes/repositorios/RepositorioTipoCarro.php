@@ -1,12 +1,11 @@
-<?
+<?php
 // Includes
-require_once("./RepositorioBase.php");
+require_once("RepositorioBase.php");
 
 // Entidades
-require_once("../entidades/TipoCarro.php");
+require_once("classes/entidades/TipoCarro.php");
 
 class RepositorioTipoCarro extends RepositorioBase {
-
     /**
      * Retorna todos os tipos de carro do banco
      *

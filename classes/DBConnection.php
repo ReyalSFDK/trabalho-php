@@ -91,5 +91,3 @@ Class DBConnection {
         return $stmt;
     }
 }
-
-$db = new DBConnection();

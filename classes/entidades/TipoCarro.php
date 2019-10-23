@@ -1,4 +1,5 @@
-<?
+<?php
+
 class TipoCarro {
     /**
      * @var string | null
@@ -28,7 +29,7 @@ class TipoCarro {
         $tipoCarro->setNome($databaseData->nome);
 
         if ($databaseData->id) {
-            $this->id = $databaseData->id;
+            $tipoCarro->id = $databaseData->id;
         }
 
         return $tipoCarro;

@@ -1,4 +1,5 @@
-<?
+<?php
+
 class Carro{
 
     /**
@@ -39,7 +40,7 @@ class Carro{
         $carro->setNome($databaseData->nome);
 
         if ($databaseData->id) {
-            $this->id = $databaseData->id;
+            $carro->id = $databaseData->id;
         }
 
         return $carro;

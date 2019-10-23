@@ -1,4 +1,6 @@
-<?
+<?php
+require_once("Singleton.php");
+
 class Core extends Singleton {
     public function setHeader(string $title) {
         return '
@@ -16,5 +18,3 @@ class Core extends Singleton {
             </head>';
     }
 }
-
-$core = new Core();
