@@ -35,4 +35,19 @@ class RepositorioPacote extends RepositorioBase{
 
         return $pacotes;
     }
+
+    public function createPacote(Pacote $pacote) {
+        print_r($pacote);
+        $sql = "
+            INSERT INTO pacote (nome, valor, periodo, id_tipo)
+            VALUES (
+                `{$pacote->getNome()}`,
+                `{$pacote->getValor()}`,
+                `{$pacote->getPeriodo()}`,
+                1
+            )
+        ";
+        var_dump($sql);
+        $this->dbConnection->runQuery($sql);
+    }
 }

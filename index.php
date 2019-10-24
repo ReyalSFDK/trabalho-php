@@ -12,6 +12,13 @@ $pacotes = $pacoteRepository->selectAllPacote();
 
 // Setar o cabeçalho
 echo $core->setHeader("Inicio");
+
+$pac = new Pacote();
+$pac->setNome("Nome");
+$pac->setValor("10");
+$pac->setPeriodo("1 dia");
+
+$pacoteRepository->createPacote($pac);
 ?>
 
 <div class="container my-5">
