@@ -3,11 +3,40 @@
 // Bootstrap
 require_once("./classes/Bootstrap.php");
 
-// Repositories
-$tipoCarroRepository = $bootstrap->getRepositorioTipoCarro();
+// Core
+$core = $bootstrap->getCore();
 
-$tiposCarro = $tipoCarroRepository->selectAllTipoCarro();
+// Repositories
+//// Pega todos os pacotes
+$pacoteRepository = $bootstrap->getRepositorioPacote();
+$pacotes = $pacoteRepository->selectAllPacote();
+
+// Setar o cabeçalho
+echo $core->setHeader("Inicio");
+?>
+
+<div class="container my-5">
+    <div class="row">
+        <?php
+            foreach ($pacotes as $pacote) {
+                ?>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><?=$pacote->getNome()?></h5>
+                            <p class="card-text"><?=$pacote->getPeriodo()?></p>
+                            <div class="row">
+                                <button type="button" class="btn btn-success">Escolha seu veiculo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+        ?>
+    </div>
+</div>
 
 ?>
 
-<pre><?=var_dump($tiposCarro)?></pre>
+<pre><?=var_dump($pacotes)?></pre>

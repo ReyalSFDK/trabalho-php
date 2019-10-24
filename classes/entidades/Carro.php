@@ -35,7 +35,7 @@ class Carro{
         return $this->id_tipo;
     }
 
-    static function  getDatabaseCarro(object $databaseData): self {
+    static function  getDatabaseCarro(stdClass $databaseData): self {
         $carro = new Carro();
         $carro->setNome($databaseData->nome);
 

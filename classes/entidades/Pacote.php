@@ -38,7 +38,7 @@ class Pacote {
     }
 
     public function setValor(string $valor): self {
-        $this->nome = $valor;
+        $this->valor = $valor;
         return $this;
     }
 
@@ -47,13 +47,15 @@ class Pacote {
     }
 
     public function setPeriodo(string $periodo): self {
-        $this->nome = $periodo;
+        $this->periodo = $periodo;
         return $this;
     }
 
-    static function  getDatabasePacote(object $databaseData): self {
+    static function  getDatabasePacote(stdClass $databaseData): self {
         $pacote = new Pacote();
         $pacote->setNome($databaseData->nome);
+        $pacote->setValor($databaseData->valor);
+        $pacote->setPeriodo($databaseData->periodo);
 
         if ($databaseData->id) {
             $pacote->id = $databaseData->id;

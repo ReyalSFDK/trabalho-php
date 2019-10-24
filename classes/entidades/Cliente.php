@@ -64,12 +64,12 @@ class Cliente {
         $this->nome = $telefone;
         return $this;
     }
-    static function  getDatabaseCliente(object $databaseData): self {
+    static function  getDatabaseCliente(stdClass $databaseData): self {
         $cliente = new Cliente();
         $cliente->setNome($databaseData->nome);
 
         if ($databaseData->id) {
-            $this->id = $databaseData->id;
+            $cliente->id = $databaseData->id;
         }
 
         return $cliente;
