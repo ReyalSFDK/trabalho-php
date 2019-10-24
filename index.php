@@ -1,5 +1,4 @@
 <?php
-
 // Bootstrap
 require_once("./classes/Bootstrap.php");
 
@@ -25,6 +24,7 @@ echo $core->setHeader("Inicio");
                         <div class="card-body">
                             <h5 class="card-title"><?=$pacote->getNome()?></h5>
                             <p class="card-text"><?=$pacote->getPeriodo()?></p>
+                            <p class="card-text text-italic"><?=$pacote->getTipoCarro()->getNome()?></p>
                             <div class="row">
                                 <button type="button" class="btn btn-success">Escolha seu veiculo</button>
                             </div>
@@ -38,5 +38,3 @@ echo $core->setHeader("Inicio");
 </div>
 
 ?>
-
-<pre><?=var_dump($pacotes)?></pre>
