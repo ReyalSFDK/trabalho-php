@@ -13,13 +13,15 @@
 </head>
 
 <body>
+   <nav class="navbar navbar-dark bg-dark" style="display: flex; justify-content: center;">
+    <img src="https://imagensemoldes.com.br/wp-content/uploads/2018/01/Logo-Filme-Carros-01.png" alt="" width=50px heigth=50px>
+  </nav>
 
   <div class="container" style="margin-top:35px;">
     <div class="row">
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-            <h2 class="card-title">Plano</h2>
             <div class="row justify-content-between">
               <div class="col-4">
                 <h5 class="card-title">Tipo</h5>
@@ -37,15 +39,15 @@
 
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item" style="display:flex; justify-content: space-between;">
-                    <p>bla bla bla</p>
+                    <p>HATCH</p>
                     <button type="button" class="btn btn-success">comprar</button>
                   </li>
                   <li class="list-group-item" style="display:flex; justify-content: space-between;">
-                    <p>bla bla bla</p>
+                    <p>SUV</p>
                     <button type="button" class="btn btn-success">comprar</button>
                   </li>
                   <li class="list-group-item" style="display:flex; justify-content: space-between;">
-                    <p>bla bla bla</p>
+                    <p>Sedan</p>
                     <button type="button" class="btn btn-success">comprar</button>
                   </li>
                 </ul>
