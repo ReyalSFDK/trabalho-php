@@ -60,11 +60,10 @@ echo $core->setHeader("Inicio");
 </html>
 
 <?php
-$data = [];
 $carro_entity = new Carro();
-$data["nome"] = $carro_entity->setNome($_POST["nome"]);
-$data["marca"] = $carro_entity->setMarca($_POST["marca"]);
-$data["imagem"] = $carro_entity->setImagem($_POST["imagem"]);
+$carro_entity->setNome($_POST["nome"]);
+$carro_entity->setMarca($_POST["marca"]);
+$carro_entity->setImagem($_POST["imagem"]);
 //$data["ano"] = $carro_entity->setAno($_POST["ano"]);
-$carros = $carroRepository->createCarro($data);
+$carroRepository->createCarro($carro_entity);
 ?>
