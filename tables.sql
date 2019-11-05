@@ -37,6 +37,9 @@ CREATE TABLE `tipo_carro` (
 CREATE TABLE `carro` (
     `id` int(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `nome` varchar(50) NOT NULL,
+    `marca` varchar(50) NOT NULL,
+    `ano` varchar(50) NOT NULL,
+    `imagem` varchar(250) NOT NULL,
     `id_tipo`int(99) NOT NULL,
     CONSTRAINT fk_carro_tipo FOREIGN KEY (id_tipo) REFERENCES tipo_carro (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -45,19 +48,23 @@ CREATE TABLE `pacote` (
     `id` int(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `nome` varchar(50) NOT NULL,
     `valor` varchar(50) NOT NULL,
-    `id_tipo` int(99) NOT NULL,
-    `periodo` varchar(250) NOT NULL,
-    CONSTRAINT fk_pacote_tipo FOREIGN KEY (id_tipo) REFERENCES tipo_carro (id)
+    `periodo` varchar(250) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `pacote_cliente` (
+CREATE TABLE `carro_pacote` (
     `id` int(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `id_pacote` int(99) NOT NULL,
-    `id_cliente` int(99) NOT NULL,
     `id_carro` int(99) NOT NULL,
-    CONSTRAINT fk_pacote_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id),
-    CONSTRAINT fk_pacote_pacote FOREIGN KEY (id_pacote) REFERENCES pacote (id),
-    CONSTRAINT fk_pacote_carro FOREIGN KEY (id_carro) REFERENCES carro (id)
+    `id_pacote` int(99) NOT NULL,
+    CONSTRAINT fk_pacote_carro FOREIGN KEY (id_pacote) REFERENCES pacote (id),
+    CONSTRAINT fk_carro_pacote FOREIGN KEY (id_carro) REFERENCES carro (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `compra_cliente` (
+    `id` int(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `id_cliente` int(99) NOT NULL,
+    `id_carro_pacote` int(99) NOT NULL,
+    CONSTRAINT fk_compra_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id),
+    CONSTRAINT fk_compra_pacote_carro FOREIGN KEY (id_carro_pacote) REFERENCES carro_pacote (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
