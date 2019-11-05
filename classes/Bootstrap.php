@@ -60,6 +60,25 @@ class Bootstrap {
         return $this->repositorioPacote;
     }
 
+    /**
+     * Repositorio do carro
+     *
+     * @var RepositorioCarro | null
+     */
+    private $repositorioCarro = null;
+
+    public function getRepositorioCarro(): RepositorioCarro {
+        if ($this->repositorioCarro === null) {
+            $this->repositorioCarro = new RepositorioCarro(
+                $this->getDatabase(),
+                $this->getRepositorioTipoCarro()
+            );
+        }
+        return $this->repositorioCarro;
+    }
+
+
+
     public function getCore() {
         $core = Core::getInstance();
         return $core;

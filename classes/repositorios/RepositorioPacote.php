@@ -39,32 +39,26 @@ class RepositorioPacote extends RepositorioBase {
     public function createPacote(Pacote $pacote) {
         $sql = "
             INSERT INTO pacote (nome, valor, periodo, id_tipo)
-            VALUES (
-                ?,
-                ?,
-                ?,
-                ?
-            )
+            VALUES (?, ?, ?, ?)
         ";
         $query = $this->dbConnection->dbc->query($sql);
-        $query->bindParam(1,$pacote->getNome());
-        $query->bindParam(2,$pacote->getValor());
-        $query->bindParam(3,$pacote->getPeriodo());
-        $query->bindParam(4,1);
+        $query->bindParam(1, $pacote->getNome());
+        $query->bindParam(2, $pacote->getValor());
+        $query->bindParam(3 ,$pacote->getPeriodo());
+        $query->bindParam(4, 1);
 
         $query->execute();
         $this->dbConnection->runQuery($query);
     }
 
     public function updatePacote(Pacote $pacote) {
-        //print_r($pacote);
         $sql = "
-            UPDATE pacote
-            SET nome = ?,
-            valor = ?,
-            periodo = ?,
-            WHERE id = ?
-            
+            UPDATE pacote SET
+                nome = ?,
+                valor = ?,
+                periodo = ?
+            WHERE
+                id = ?
         ";
 
         $query = $this->dbConnection->dbc->query($sql);

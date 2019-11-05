@@ -6,7 +6,17 @@ require_once("RepositorioBase.php");
 // Entidades
 require_once("classes/entidades/Carro.php");
 
-class RepositorioCarro extends RepositorioBase{
+class RepositorioCarro extends RepositorioBase {
+
+    /**
+     * @var RepositorioTipoCarro
+     */
+    private $repositorioTipoCarro;
+
+    public function __construct(DBConnection $dbConnection, RepositorioTipoCarro $repositorioTipoCarro) {
+        $this->repositorioTipoCarro = $repositorioTipoCarro;
+        parent::__construct($dbConnection);
+    }
 
     /**
      * Retorna todos os tipos de carro do banco
@@ -19,7 +29,11 @@ class RepositorioCarro extends RepositorioBase{
 
         $carros = [];
         foreach ($result as $databaseData) {
-            $carros[] = Carro::getDatabaseCarro($databaseData);
+            $carro = Carro::getDatabaseCarro($databaseData);
+            $carro->setTipoCarro(
+                $this->repositorioTipoCarro->selectTipoCarro($result->id_tipo)
+            );
+            $carros[] = $carro;
         }
 
         return $carros;

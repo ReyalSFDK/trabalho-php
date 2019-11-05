@@ -22,4 +22,12 @@ class RepositorioTipoCarro extends RepositorioBase {
 
         return $tipo_carros;
     }
+
+    public function selectTipoCarro(string $idTipoCarro) {
+        $sql = "SELECT * FROM tipo_carro WHERE id = ?";
+        $query = $this->dbConnection->dbc->query($sql);
+        $query->bindParam(1, $idTipoCarro);
+        $query->setFetchMode(PDO::FETCH_OBJ);
+        return TipoCarro::getDatabaseTipoCarro($query);
+    }
 }

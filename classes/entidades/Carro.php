@@ -1,41 +1,97 @@
 <?php
 
-class Carro{
+class Carro {
 
     /**
      * @var string | null
      */
-
     private $id = null;
 
     /**
-     * @var string | null
+     * @var string
      */
-
     private $nome;
 
     /**
-     * @var string | null
+     * @var string
      */
+    private $marca;
 
-    private $id_tipo;
+    /**
+     * @var string
+     */
+    private $imagem;
+
+    /**
+     * @var TipoCarro
+     */
+    private $tipoCarro;
 
     public function getId(): ?string {
 
         return $this->id;
     }
-    
+
     public function getNome(): string {
 
         return $this->nome;
     }
-    
-    public function getIdTipo(): string {
 
-        return $this->id_tipo;
+    /**
+     * @return string
+     */
+    public function getMarca(): string
+    {
+        return $this->marca;
     }
 
-    static function  getDatabaseCarro(stdClass $databaseData): self {
+    /**
+     * @param string $marca
+     * @return Carro
+     */
+    public function setMarca(string $marca): Carro
+    {
+        $this->marca = $marca;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImagem(): string
+    {
+        return $this->imagem;
+    }
+
+    /**
+     * @param string $imagem
+     * @return Carro
+     */
+    public function setImagem(string $imagem): Carro
+    {
+        $this->imagem = $imagem;
+        return $this;
+    }
+
+    /**
+     * @return TipoCarro
+     */
+    public function getTipoCarro(): TipoCarro
+    {
+        return $this->tipoCarro;
+    }
+
+    /**
+     * @param TipoCarro $tipoCarro
+     * @return Carro
+     */
+    public function setTipoCarro(TipoCarro $tipoCarro): Carro
+    {
+        $this->tipoCarro = $tipoCarro;
+        return $this;
+    }
+
+    static function getDatabaseCarro(stdClass $databaseData): self {
         $carro = new Carro();
         $carro->setNome($databaseData->nome);
 
