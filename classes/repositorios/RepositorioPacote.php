@@ -1,3 +1,4 @@
+
 <?php
 // Includes
 require_once("RepositorioBase.php");
@@ -44,15 +45,15 @@ class RepositorioPacote extends RepositorioBase{
                 ?,
                 ?,
                 ?,
-                1
+                ?
             )
         ";
         $query = $this->dbConnection->dbc->query($sql); 
-        $query->bindParam(
-        1,$pacote->getNome(), 
-        2,$pacote->getValor(), 
-        3,$pacote->getPeriodo(),
-        );
+        $query->bindParam(1,$pacote->getNome()); 
+        $query->bindParam(2,$pacote->getValor());
+        $query->bindParam(3,$pacote->getPeriodo());
+        $query->bindParam(4,1);
+        
         $query->execute();
         $this->dbConnection->runQuery($query);
     }
@@ -67,13 +68,12 @@ class RepositorioPacote extends RepositorioBase{
             WHERE id = ?
             
         ";
+        
         $query = $this->dbConnection->dbc->query($sql); 
-        $query->bindParam(
-        1,$pacote->getNome(), 
-        2,$pacote->getValor(), 
-        3,$pacote->getPeriodo(),
-        4,$pacote->getId()
-        );
+        $query->bindParam(1,$pacote->getNome()); 
+        $query->bindParam(2,$pacote->getValor()); 
+        $query->bindParam(3,$pacote->getPeriodo());
+        $query->bindParam(4,$pacote->getId());
         $query->execute();
         //var_dump($sql);
         
