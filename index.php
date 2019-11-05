@@ -13,29 +13,31 @@ $pacotes = $pacoteRepository->selectAllPacote();
 // Setar o cabeçalho
 echo $core->setHeader("Inicio");
 
-$pac = new Pacote();
-$pac->setNome("Nome");
-$pac->setValor("10");
-$pac->setPeriodo("1 dia");
-
-$pacoteRepository->createPacote($pac);
+//$pac = new Pacote();
+//$pac->setNome("Nome");
+//$pac->setValor("10");
+//$pac->setPeriodo("1 dia");
+//
+//$pacoteRepository->createPacote($pac);
 ?>
-
+<nav class="navbar navbar-dark bg-dark" style="display: flex; justify-content: center;">
+    <img src="https://imagensemoldes.com.br/wp-content/uploads/2018/01/Logo-Filme-Carros-01.png" alt="" width=50px heigth=50px>
+</nav>
 <div class="container my-5">
     <div class="row">
         <?php
             foreach ($pacotes as $pacote) {
                 ?>
                 <div class="col-4">
-                    <div class="card">
+                    <div class="card border-dark">
                         <div class="card-body">
-                            <h5 class="card-title"><?=$pacote->getNome()?></h5>
+                            <h4 class="card-title text-dark font-weight-bold"><?=$pacote->getNome()?></h4>
                             <p class="card-text"><?=$pacote->getPeriodo()?></p>
                             <p class="card-text text-italic"><?=$pacote->getTipoCarro()->getNome()?></p>
-                            <div class="row">
-                                <button type="button" class="btn btn-success">Escolha seu veiculo</button>
-                            </div>
                         </div>
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-action list-group-item-success text-center h4">Escolha seu veiculo</li>
+                        </ul>
                     </div>
                 </div>
                 <?php

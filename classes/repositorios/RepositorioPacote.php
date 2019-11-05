@@ -5,7 +5,7 @@ require_once("RepositorioBase.php");
 // Entidades
 require_once("classes/entidades/Pacote.php");
 
-class RepositorioPacote extends RepositorioBase{
+class RepositorioPacote extends RepositorioBase {
 
     /**
      * Retorna todos os tipos de carro do banco
@@ -37,7 +37,6 @@ class RepositorioPacote extends RepositorioBase{
     }
 
     public function createPacote(Pacote $pacote) {
-        print_r($pacote);
         $sql = "
             INSERT INTO pacote (nome, valor, periodo, id_tipo)
             VALUES (
@@ -47,7 +46,6 @@ class RepositorioPacote extends RepositorioBase{
                 1
             )
         ";
-        var_dump($sql);
         $this->dbConnection->runQuery($sql);
     }
 }
