@@ -1,3 +1,4 @@
+
 <?php
 // Includes
 require_once("RepositorioBase.php");
@@ -41,13 +42,54 @@ class RepositorioPacote extends RepositorioBase{
         $sql = "
             INSERT INTO pacote (nome, valor, periodo, id_tipo)
             VALUES (
-                `{$pacote->getNome()}`,
-                `{$pacote->getValor()}`,
-                `{$pacote->getPeriodo()}`,
-                1
+                ?,
+                ?,
+                ?,
+                ?
             )
         ";
-        var_dump($sql);
-        $this->dbConnection->runQuery($sql);
+        $query = $this->dbConnection->dbc->query($sql); 
+        $query->bindParam(1,$pacote->getNome()); 
+        $query->bindParam(2,$pacote->getValor());
+        $query->bindParam(3,$pacote->getPeriodo());
+        $query->bindParam(4,1);
+        
+        $query->execute();
+        $this->dbConnection->runQuery($query);
+    }
+
+    public function updatePacote(Pacote $pacote) {
+        //print_r($pacote);
+        $sql = "
+            UPDATE pacote
+            SET nome = ?,
+            valor = ?,
+            periodo = ?,
+            WHERE id = ?
+            
+        ";
+        
+        $query = $this->dbConnection->dbc->query($sql); 
+        $query->bindParam(1,$pacote->getNome()); 
+        $query->bindParam(2,$pacote->getValor()); 
+        $query->bindParam(3,$pacote->getPeriodo());
+        $query->bindParam(4,$pacote->getId());
+        $query->execute();
+        //var_dump($sql);
+        
+    }
+
+    public function deletePacote(Pacote $pacote) {
+        //print_r($pacote);
+        $sql = "
+            DELETE FROM pacote 
+            WHERE id = ?
+    
+        ";
+        $query = $this->dbConnection->dbc->query($sql); 
+        $query->bindParam(1, $pacote->getId());
+        $query->execute();
+        //var_dump($sql);
+        
     }
 }
