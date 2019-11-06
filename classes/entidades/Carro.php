@@ -32,10 +32,24 @@ class Carro {
         return $this->id;
     }
 
+    /**
+     * @return string
+     */
     public function getNome(): string {
 
         return $this->nome;
     }
+
+    /**
+     * @param string $imagem
+     * @return Carro
+     */
+    public function setNome(string $nome): Carro
+    {
+        $this->nome = $nome;
+        return $this;
+    }
+
 
     /**
      * @return string
