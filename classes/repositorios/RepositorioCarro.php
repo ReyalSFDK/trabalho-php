@@ -14,8 +14,19 @@ class RepositorioCarro extends RepositorioBase {
          * @return Carro[]
          */
         public function selectAllCarro() {
-            // Faz a consulta no banco e pega o pacote com suas relações
-            $sql = "SELECT * FROM carro ";
+            // Faz a consulta no banco e pega o carro com suas relações
+            $sql = "SELECT 
+                c.id as id,
+                c.nome as nome,
+                c.marca as marca,
+                c.imagem as imagem,
+                tp.id as tipoCarro_id,
+                tp.nome as tipoCarro_nome               
+            FROM carro AS p 
+            INNER JOIN tipo_carro AS tp 
+            WHERE c.id_tipo = tp.id
+           
+            ";
             $result = $this->dbConnection->getQuery($sql);
 
             $carros = [];
@@ -52,17 +63,17 @@ class RepositorioCarro extends RepositorioBase {
         ";
 
             $query = $this->dbConnection->dbc->query($sql);
-            $query->bindParam(1,$pacote->getNome());
-            $query->bindParam(2,$pacote->getMarca());
-            $query->bindParam(3,$pacote->getImagem());
-            $query->bindParam(4,$pacote->getId());
+            $query->bindParam(1,$carro->getNome());
+            $query->bindParam(2,$carro->getMarca());
+            $query->bindParam(3,$carro->getImagem());
+            $query->bindParam(4,$carro->getId());
             $query->execute();
             //var_dump($sql);
 
         }
 
         public function deleteCarro(Carro $carro) {
-            //print_r($pacote);
+            //print_r($carro);
             $sql = "
             DELETE FROM carro 
             WHERE id = ?
