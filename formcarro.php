@@ -1,8 +1,9 @@
 <?php
 // Bootstrap
-require_once("./classes/Bootstrap.php");
+require_once("classes/Bootstrap.php");
 // Entidades
 require_once("classes/entidades/Carro.php");
+require_once("classes/entidades/TipoCarro.php");
 // Core
 $core = $bootstrap->getCore();
 
@@ -10,8 +11,32 @@ $core = $bootstrap->getCore();
 //// Pega todos os pacotes
 $carroRepository = $bootstrap->getRepositorioCarro();
 
+$nome = $_POST["nome"] ?? "";
+$marca = $_POST["marca"] ?? "";
+$imagem = $_POST["imagem"] ?? "";
+$ano = $_POST["ano"] ?? "";
+
+
+$carro_entity = new Carro();
+$carro_entity->setNome($nome);
+$carro_entity->setMarca($marca);
+$carro_entity->setImagem($imagem);
+$carro_entity -> setAno($ano);
+
+$alert = null;
+$erro = $carro_entity.validate();
+if (!$erro) {
+    $carroRepository->createCarro($carro_entity);
+    $alert = "Carro criado";
+} else {
+    $alert = $erro;
+}
+
 
 echo $core->setHeader("Inicio");
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,25 +55,32 @@ echo $core->setHeader("Inicio");
     <h5 class="card-header">Cadastrar o carro</h5>
     <div class="card-body">
 
+        <?php
+            if ($alert) {
+                ?>
+                    <div class="alert alert-light"><?+$alert?></div>
+                <?php
+            }
+        ?>
         <form method="POST" >
             <div class="form-group">
                 <label for="nome">Nome: </label>
-                <input class="form-control" type="text" name="nome" id="nome" value<?= $_POST['nome'];?> placeholder="Digite o nome do carro"><br><br>
+                <input class="form-control" type="text" name="nome" id="nome" value<?=$carro_entity->getNome();?> placeholder="Digite o nome do carro"><br><br>
             </div>
 
             <div class="form-group">
                 <label for="ano">Ano: </label>
-                <input class="form-control" type="date" name="ano" id="ano" value<?= $_POST['ano'];?> placeholder="Escolha o ano do carro"><br><br>
+                <input class="form-control" type="date" name="ano" id="ano" value<?=$carro_entity->getAno()?>> placeholder="Escolha o ano do carro"><br><br>
             </div>
 
             <div class="form-group">
                 <label for="marca">Marca: </label>
-                <input class="form-control" type="text" name="marca" id="marca" value<?= $_POST['marca'];?> placeholder="Digite a marca do carro"><br><br>
+                <input class="form-control" type="text" name="marca" id="marca" value<?= $carro_entity->getMarca();?> placeholder="Digite a marca do carro"><br><br>
             </div>
 
             <div class="form-group">
                 <label for="imagem">Imagem: </label>
-                <input class="form-control" type="file" name="imagem" id="imagem" <?= $_POST['imagem'];?> placeholder="Insira a imagem do carro"><br><br>
+                <input class="form-control" type="file" name="imagem" id="imagem" <?= $carro_entity->getImagem();?> placeholder="Insira a imagem do carro"><br><br>
             </div>
 
 
@@ -60,10 +92,5 @@ echo $core->setHeader("Inicio");
 </html>
 
 <?php
-$carro_entity = new Carro();
-$carro_entity->setNome($_POST["nome"]);
-$carro_entity->setMarca($_POST["marca"]);
-$carro_entity->setImagem($_POST["imagem"]);
-//$data["ano"] = $carro_entity->setAno($_POST["ano"]);
-$carroRepository->createCarro($carro_entity);
+
 ?>

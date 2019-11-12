@@ -5,6 +5,7 @@ require_once("Core.php");
 
 //// Repositorios
 require_once("repositorios/RepositorioTipoCarro.php");
+require_once("repositorios/RepositorioCarro.php");
 require_once("repositorios/RepositorioPacote.php");
 
 class Bootstrap {
