@@ -14,18 +14,7 @@ class RepositorioPacote extends RepositorioBase {
      */
     public function selectAllPacote() {
         // Faz a consulta no banco e pega o pacote com suas relações
-        $sql = "
-            SELECT
-                p.id as id,
-                p.nome as nome,
-                p.valor as valor,
-                p.periodo as periodo,
-                tp.id as tipoCarro_id,
-                tp.nome as tipoCarro_nome               
-            FROM pacote AS p 
-            INNER JOIN tipo_carro AS tp 
-            WHERE p.id_tipo = tp.id
-        ";
+        $sql = "SELECT * FROM pacote";
         $result = $this->dbConnection->getQuery($sql);
 
         $pacotes = [];

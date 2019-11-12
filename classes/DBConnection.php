@@ -87,6 +87,9 @@ Class DBConnection {
      */
     public function getQuery( $sql ) {
         $stmt = $this->dbc->query( $sql );
+        if (!$stmt) {
+            die(var_export($this->dbc->errorinfo(), TRUE));
+        }
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         return $stmt;
     }
