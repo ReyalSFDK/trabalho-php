@@ -25,6 +25,19 @@ class RepositorioPacote extends RepositorioBase {
         return $pacotes;
     }
 
+    public function selectPacote($id) {
+        $sql = "SELECT * FROM pacote WHERE id = ?";
+        $query = $this->dbConnection->getQuery($sql);
+
+        $query->bindParam(1, $id);
+        
+        $result = $this->dbConnection->runQuery($query);
+
+        $pacote = Pacote::getDatabasePacote($result);
+
+        return $pacote;
+    }
+
     public function createPacote(Pacote $pacote) {
         $sql = "
             INSERT INTO pacote (nome, valor, periodo, id_tipo)
