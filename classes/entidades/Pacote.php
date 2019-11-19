@@ -20,6 +20,11 @@ class Pacote {
      */
     private $periodo;
 
+    /**
+     * @var Carro[
+     */
+    private $carros;
+
     public function getId(): ?string {
         return $this->id;
     }
@@ -49,6 +54,16 @@ class Pacote {
     public function setPeriodo(string $periodo): self {
         $this->periodo = $periodo;
         return $this;
+    }
+
+    public function addCarro(Carro $carro): self {
+        $this->carros[] = $carro;
+
+        return $this;
+    }
+
+    public function getCarros(): Carro {
+        return $this->carros;
     }
 
     static function  getDatabasePacote(stdClass $databaseData): self {
