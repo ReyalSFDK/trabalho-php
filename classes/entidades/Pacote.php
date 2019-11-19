@@ -20,11 +20,6 @@ class Pacote {
      */
     private $periodo;
 
-    /**
-     * @var TipoCarro
-     */
-    private $tipoCarro;
-
     public function getId(): ?string {
         return $this->id;
     }
@@ -56,22 +51,6 @@ class Pacote {
         return $this;
     }
 
-    /**
-     * @return TipoCarro
-     */
-    public function getTipoCarro(): TipoCarro {
-        return $this->tipoCarro;
-    }
-
-    /**
-     * @param TipoCarro $tipoCarro
-     * @return Pacote
-     */
-    public function setTipoCarro(TipoCarro $tipoCarro): Pacote {
-        $this->tipoCarro = $tipoCarro;
-        return $this;
-    }
-
     static function  getDatabasePacote(stdClass $databaseData): self {
         $pacote = new Pacote();
         $pacote->setNome($databaseData->nome);
@@ -81,11 +60,6 @@ class Pacote {
         if ($databaseData->id) {
             $pacote->id = $databaseData->id;
         }
-
-        // Adiciona o tipo de carro
-        $tipoCarro = new TipoCarro();
-        $tipoCarro->setNome($databaseData->tipoCarro_nome);
-        $pacote->setTipoCarro($tipoCarro);
 
         return $pacote;
     }

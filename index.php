@@ -31,9 +31,9 @@ echo $core->setHeader("Inicio");
                 <div class="col-4">
                     <div class="card border-dark">
                         <div class="card-body">
-                            <h4 class="card-title text-dark font-weight-bold"><?=$pacote->getNome()?></h4>
+                            <h4 class="card-title text-dark font-weight-bold">Premium </h4>
+                            <p class="card-text text-italic">50 reais </p>
                             <p class="card-text"><?=$pacote->getPeriodo()?></p>
-                            <p class="card-text text-italic"><?=$pacote->getTipoCarro()->getNome()?></p>
                         </div>
                         <ul class="list-group">
                             <li class="list-group-item list-group-item-action list-group-item-success text-center h4">Escolha seu veiculo</li>
