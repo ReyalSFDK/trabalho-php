@@ -28,16 +28,21 @@ class RepositorioCliente extends RepositorioBase {
     /**
      * Retorna todos os tipos de carro do banco
      *
-     * @return Cliente[]
+     * @return Cliente | null
      */
     public function getClienteByCPF(string $cpf) {
         // Faz a consulta no banco e pega todos os clientes
-        $sql = "SELECT COUNT(*) FROM cliente WHERE cpf = ?";
+        $sql = "SELECT * FROM cliente WHERE cpf = ?";
         $query = $this->dbConnection->dbc->query($sql);
         $query->bindParam(1, $cpf);
 
+        $result = $this->dbConnection->runQuery($query);
 
-        return $clientes;
+        if ($result) {
+            return Cliente::getDatabaseCliente($result);
+        }
+
+        return null;
     }
 
     public function createCliente(Cliente $cliente) {
