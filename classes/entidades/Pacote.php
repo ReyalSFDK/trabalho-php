@@ -21,11 +21,6 @@ class Pacote {
     private $periodo;
 
     /**
-     * @var TipoCarro
-     */
-    private $tipoCarro;
-
-    /**
      * @var Carro[
      */
     private $carros;
@@ -61,22 +56,6 @@ class Pacote {
         return $this;
     }
 
-    /**
-     * @return TipoCarro
-     */
-    public function getTipoCarro(): TipoCarro {
-        return $this->tipoCarro;
-    }
-
-    /**
-     * @param TipoCarro $tipoCarro
-     * @return Pacote
-     */
-    public function setTipoCarro(TipoCarro $tipoCarro): Pacote {
-        $this->tipoCarro = $tipoCarro;
-        return $this;
-    }
-
     public function addCarro(Carro $carro): self {
         $this->carros[] = $carro;
 
@@ -96,11 +75,6 @@ class Pacote {
         if ($databaseData->id) {
             $pacote->id = $databaseData->id;
         }
-
-        // Adiciona o tipo de carro
-        $tipoCarro = new TipoCarro();
-        $tipoCarro->setNome($databaseData->tipoCarro_nome);
-        $pacote->setTipoCarro($tipoCarro);
 
         return $pacote;
     }
