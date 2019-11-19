@@ -45,5 +45,3 @@ echo $core->setHeader("Inicio");
         ?>
     </div>
 </div>
-
-?>
