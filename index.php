@@ -26,7 +26,7 @@ echo $core->setHeader("Inicio");
                     <div class="card border-dark">
                         <div class="card-body">
                             <h4 class="card-title text-dark font-weight-bold"><?=$pacote->getNome()?></h4>
-                            <p class="card-text text-italic">R$ <?=$pacote->getValor()?> </p>
+                            <p class="card-text text-italic">R$ <?=$pacote->getValor()?></p>
                             <p class="card-text"><?=$pacote->getPeriodo()?></p>
                         </div>
                         <ul class="list-group">
