@@ -1,18 +1,41 @@
 <?php
+// Bootstrap
+require_once("./classes/Bootstrap.php");
 
-// Pega a classe de banco de daos
-require_once("classes/Database.php");
+// Core
+$core = $bootstrap->getCore();
 
-// Pega a instância unica do banco
-$con = $db->getDatabase();
+// Repositories
+//// Pega todos os pacotes
+$pacoteRepository = $bootstrap->getRepositorioPacote();
+$pacotes = $pacoteRepository->selectAllPacote();
 
-// Faz uma query para todos os pacotes
-$query = $con->query("select * from pacote");
+// Setar o cabeçalho
+echo $core->setHeader("Inicio");
 
-// Armazeno os pacores em um array
-$pacotes = $query->fetch(PDO::FETCH_OBJ);
-
-// loop para pecorrer todos os pacotes
-foreach ($pacotes as $pacote) {
-    $pacote->id;
-}
+?>
+<nav class="navbar navbar-dark bg-dark" style="display: flex; justify-content: center;">
+    <img src="https://imagensemoldes.com.br/wp-content/uploads/2018/01/Logo-Filme-Carros-01.png" alt="" width=50px heigth=50px>
+</nav>
+<div class="container my-5">
+    <div class="row">
+        <?php
+            foreach ($pacotes as $pacote) {
+                ?>
+                <div class="col-4">
+                    <div class="card border-dark">
+                        <div class="card-body">
+                            <h4 class="card-title text-dark font-weight-bold"><?=$pacote->getNome()?></h4>
+                            <p class="card-text text-italic">R$ <?=$pacote->getValor()?></p>
+                            <p class="card-text"><?=$pacote->getPeriodo()?></p>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-action list-group-item-success text-center h4">Escolha seu veiculo</li>
+                        </ul>
+                    </div>
+                </div>
+                <?php
+            }
+        ?>
+    </div>
+</div>

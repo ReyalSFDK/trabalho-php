@@ -8,7 +8,7 @@
 -- PHP Version: 5.6.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+SET time_zone = "-03:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -30,44 +30,51 @@ CREATE TABLE `periodo` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `tipo_carro` (
-    `id` int(99) NOT NULL AUTO_INCREMENT,
+    `id` int(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `nome` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `carro` (
-    `id` int(99) NOT NULL AUTO_INCREMENT,
+    `id` int(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `nome` varchar(50) NOT NULL,
+    `marca` varchar(50) NOT NULL,
+    `ano` varchar(50) NOT NULL,
+    `imagem` varchar(250) NOT NULL,
     `id_tipo`int(99) NOT NULL,
     CONSTRAINT fk_carro_tipo FOREIGN KEY (id_tipo) REFERENCES tipo_carro (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `pacote` (
-    `id` int(99) NOT NULL AUTO_INCREMENT,
+    `id` int(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `nome` varchar(50) NOT NULL,
     `valor` varchar(50) NOT NULL,
-    `id_tipo` int(99) NOT NULL,
-    `periodo` varchar(250) NOT NULL,
-    CONSTRAINT fk_pacote_tipo FOREIGN KEY (id_tipo) REFERENCES tipo_carro (id)
+    `periodo` varchar(250) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `pacote_cliente` (
-    `id` int(99) NOT NULL AUTO_INCREMENT,
-    `id_pacote` int(99) NOT NULL,
-    `id_cliente` int(99) NOT NULL,
+CREATE TABLE `carro_pacote` (
+    `id` int(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `id_carro` int(99) NOT NULL,
-    CONSTRAINT fk_pacote_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id),
-    CONSTRAINT fk_pacote_pacote FOREIGN KEY (id_pacote) REFERENCES pacote (id),
-    CONSTRAINT fk_pacote_carro FOREIGN KEY (id_carro) REFERENCES carro (id)
+    `id_pacote` int(99) NOT NULL,
+    CONSTRAINT fk_pacote_carro FOREIGN KEY (id_pacote) REFERENCES pacote (id),
+    CONSTRAINT fk_carro_pacote FOREIGN KEY (id_carro) REFERENCES carro (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `compra_cliente` (
+    `id` int(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `id_cliente` int(99) NOT NULL,
+    `id_carro_pacote` int(99) NOT NULL,
+    CONSTRAINT fk_compra_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id),
+    CONSTRAINT fk_compra_pacote_carro FOREIGN KEY (id_carro_pacote) REFERENCES carro_pacote (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `cliente` (
-    `id` int(99) NOT NULL AUTO_INCREMENT,
+    `id` int(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `nome` varchar(50) NOT NULL,
     `email` varchar(25) NOT NULL,
     `cpf` varchar(11) NOT NULL,
     `telefone` varchar(11) NOT NULL,
-    `id_pacote` int(99) NOT NULL
+    `id_pacote` int(99) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 insert into periodo
