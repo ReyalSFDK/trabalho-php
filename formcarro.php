@@ -14,17 +14,17 @@ $carroRepository = $bootstrap->getRepositorioCarro();
 $nome = $_POST["nome"] ?? "";
 $marca = $_POST["marca"] ?? "";
 $imagem = $_POST["imagem"] ?? "";
-$ano = $_POST["ano"] ?? "";
+//$ano = $_POST["ano"] ?? "";
 
 
 $carro_entity = new Carro();
 $carro_entity->setNome($nome);
 $carro_entity->setMarca($marca);
 $carro_entity->setImagem($imagem);
-$carro_entity -> setAno($ano);
+//$carro_entity -> setAno($ano);
 
 $alert = null;
-$erro = $carro_entity.validate();
+$erro = $carro_entity->validate();
 if (!$erro) {
     $carroRepository->createCarro($carro_entity);
     $alert = "Carro criado";
@@ -68,10 +68,10 @@ echo $core->setHeader("Inicio");
                 <input class="form-control" type="text" name="nome" id="nome" value<?=$carro_entity->getNome();?> placeholder="Digite o nome do carro"><br><br>
             </div>
 
-            <div class="form-group">
+            <!--div class="form-group">
                 <label for="ano">Ano: </label>
-                <input class="form-control" type="date" name="ano" id="ano" value<?=$carro_entity->getAno()?>> placeholder="Escolha o ano do carro"><br><br>
-            </div>
+                <input class="form-control" type="date" name="ano" id="ano" value<//?=$carro_entity->getAno()?>> placeholder="Escolha o ano do carro"><br><br>
+            </div-->
 
             <div class="form-group">
                 <label for="marca">Marca: </label>
@@ -91,6 +91,6 @@ echo $core->setHeader("Inicio");
 </body>
 </html>
 
-<?php
 
-?>
+
+
