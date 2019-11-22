@@ -96,14 +96,14 @@ class Carro {
     }
 
     public function validate() {
-        if (len($this->nome) < 0 || empty($this->nome)) {
+        if (strlen($this->nome) < 0 || empty($this->nome)) {
             return "O nome não pode ser vazio";
-        }
-        if (len($this->nome) > 20) {
+        } 
+        if (strlen($this->nome) > 20) {
             return "O nome é mair que 20";
         }
 
-        if (len($this->marca < 0) || empty($this->marca)){
+        if (strlen($this->marca < 0) || empty($this->marca)){
             return "O nome da marca não pode ser vazia";
         }
         if (empty($this->imagem)){

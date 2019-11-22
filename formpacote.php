@@ -7,7 +7,7 @@ require_once("classes/entidades/Pacote.php");
 $core = $bootstrap->getCore();
 
 // Repositories
-//// Pega todos os pacotes
+//// RepositorioPacote
 $pacoteRepository = $bootstrap->getRepositorioPacote();
 
 $nome = $_POST["nome"] ?? "";
@@ -19,9 +19,12 @@ $pacote_entity = new Pacote();
 $pacote_entity->setNome($nome);
 $pacote_entity->setValor($valor);
 $pacote_entity->setPeriodo($periodo);
-$pacoteRepository->createPacote($pacote_entity);
 
-$carro_tipo_all = selectAllTipoCarro();
+
+// RepositorioTipoCarro
+$carroRepository = $bootstrap->getRepositorioTipoCarro();
+
+$carro_tipo_all = $carroRepository->selectAllTipoCarro();
 
 $alert = null;
 $erro = $pacote_entity->validate();
