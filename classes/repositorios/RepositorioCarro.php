@@ -79,12 +79,12 @@ class RepositorioCarro extends RepositorioBase {
         $carro_nome = $carro->getNome();
         $carro_marca = $carro->getMarca();
         $carro_imagem = $carro->getImagem();
-        //$carro_tipocarro = $carro->getTipoCarro()->getId();
+        $carro_tipocarro = $carro->getTipoCarro()->getId();
 
         //AVISO: falta ser passado o id_tipo para essa query.
         $query = $this->dbConnection->dbc->prepare("
         INSERT INTO carro (nome, marca, imagem, id_tipo)
-        VALUES (?, ?, ?, 1)
+        VALUES (?, ?, ?, ?)
         ");
         
         //$query = $this->dbConnection->dbc->query($sql);
@@ -92,7 +92,7 @@ class RepositorioCarro extends RepositorioBase {
         $query->bindParam(1, $carro_nome);
         $query->bindParam(2, $carro_marca);
         $query->bindParam(3, $carro_imagem);
-        //$query->bindParam(4, $carro_tipocarro);
+        $query->bindParam(4, $carro_tipocarro);
 
         $query->execute();
         //$this->dbConnection->runQuery($query->queryString());

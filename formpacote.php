@@ -20,7 +20,7 @@ $pacote_entity->setNome($nome);
 $pacote_entity->setValor($valor);
 $pacote_entity->setPeriodo($periodo);
 
-
+var_dump($pacote_entity);
 // RepositorioTipoCarro
 $carroRepository = $bootstrap->getRepositorioTipoCarro();
 
@@ -60,7 +60,7 @@ echo $core->setHeader("Inicio");
         <?php
         if ($alert) {
             ?>
-            <div class="alert alert-light"><?+$alert?></div>
+            <div class="alert alert-light"><?=$alert?></div>
             <?php
         }
         ?>
@@ -72,12 +72,12 @@ echo $core->setHeader("Inicio");
 
     <div class="form-group">
     <label for="valor">Valor: </label>
-    <input class="form-control" type="number" name="valor" id="valor" value<?= $pacote_entity->getValor();?> placeholder="Digite o valor do pacote"><br><br>
+    <input class="form-control" type="text" name="valor" id="valor" value<?= $pacote_entity->getValor();?> placeholder="Digite o valor do pacote"><br><br>
     </div>
 
     <div class="form-group">
     <label>periodo: </label>
-    <input class="form-control" type="number" name="periodo" value<?= $pacote_entity->getPeriodo();?> placeholder="Digite a quantidade de dias do periodo"><br><br>
+    <input class="form-control" type="text" name="periodo" value<?= $pacote_entity->getPeriodo();?> placeholder="Digite a quantidade de dias do periodo"><br><br>
     </div>
 
 

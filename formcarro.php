@@ -10,10 +10,14 @@ $core = $bootstrap->getCore();
 // Repositories
 //// Pega todos os pacotes
 $carroRepository = $bootstrap->getRepositorioCarro();
+$tipoCarroRepository = $bootstrap->getRepositorioTipoCarro();
+
+$tiposCarro = $tipoCarroRepository->selectAllTipoCarro();
 
 $nome = $_POST["nome"] ?? "";
 $marca = $_POST["marca"] ?? "";
 $imagem = $_POST["imagem"] ?? "";
+$tCarro = $_POST["tCarro"] ?? "";
 //$ano = $_POST["ano"] ?? "";
 
 
@@ -21,6 +25,11 @@ $carro_entity = new Carro();
 $carro_entity->setNome($nome);
 $carro_entity->setMarca($marca);
 $carro_entity->setImagem($imagem);
+if (strlen($tCarro) > 0) {
+    $tipoNoCarro = $tipoCarroRepository->selectTipoCarro($tCarro);
+    $carro_entity->setTipoCarro($tipoNoCarro);
+}
+
 //$carro_entity -> setAno($ano);
 
 $alert = null;
@@ -32,7 +41,7 @@ if (!$erro) {
     $alert = $erro;
 }
 
-
+var_dump($carro_entity);
 echo $core->setHeader("Inicio");
 
 
@@ -76,6 +85,19 @@ echo $core->setHeader("Inicio");
             <div class="form-group">
                 <label for="marca">Marca: </label>
                 <input class="form-control" type="text" name="marca" id="marca" value<?= $carro_entity->getMarca();?> placeholder="Digite a marca do carro"><br><br>
+            </div>
+
+            <div class="form-group">
+                <label for="marca">Tipo do Carro: </label>
+                <select class="form-control" id="exampleFormControlSelect1" name="tCarro">
+                    <?php
+                    foreach ($tiposCarro as $tipoCarro) {
+                        ?>
+                            <option value="<?=$tipoCarro->getId()?>" ><?=$tipoCarro->getNome()?></option>
+                        <?php
+                        }
+                    ?>
+                </select>
             </div>
 
             <div class="form-group">
