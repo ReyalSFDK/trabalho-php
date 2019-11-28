@@ -66,6 +66,26 @@ class Pacote {
         return $this->carros;
     }
 
+
+    public function validate() {
+        if (strlen($this->nome) < 0 || empty($this->nome)) {
+            return "O nome não pode ser vazio";
+        } 
+        if (strlen($this->nome) > 20) {
+            return "O nome é maior que 20";
+        }
+
+        if (strlen($this->valor < 0) || empty($this->valor)){
+            return "O valor não pode ser vazio";
+        }
+        if (empty($this->periodo)){
+            return "Você não inseriu um período";
+        }
+
+        return null;
+    }
+    
+
     static function  getDatabasePacote(stdClass $databaseData): self {
         $pacote = new Pacote();
         $pacote->setNome($databaseData->nome);

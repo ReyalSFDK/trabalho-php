@@ -76,18 +76,26 @@ class RepositorioCarro extends RepositorioBase {
     }
 
     public function createCarro(Carro $carro) {
-        $sql = "
+        $carro_nome = $carro->getNome();
+        $carro_marca = $carro->getMarca();
+        $carro_imagem = $carro->getImagem();
+        $carro_tipocarro = $carro->getTipoCarro()->getId();
+
+        //AVISO: falta ser passado o id_tipo para essa query.
+        $query = $this->dbConnection->dbc->prepare("
         INSERT INTO carro (nome, marca, imagem, id_tipo)
         VALUES (?, ?, ?, ?)
-    ";
-        $query = $this->dbConnection->dbc->query($sql);
-        $query->bindParam(1, $carro->getNome());
-        $query->bindParam(2, $carro->getMarca());
-        $query->bindParam(3 ,$carro->getImagem());
-        $query->bindParam(4, $carro->getTipoCarro()->getId());
+        ");
+        
+        //$query = $this->dbConnection->dbc->query($sql);
+        
+        $query->bindParam(1, $carro_nome);
+        $query->bindParam(2, $carro_marca);
+        $query->bindParam(3, $carro_imagem);
+        $query->bindParam(4, $carro_tipocarro);
 
         $query->execute();
-        $this->dbConnection->runQuery($query);
+        //$this->dbConnection->runQuery($query->queryString());
     }
 
     public function updateCarro(Carro $carro) {

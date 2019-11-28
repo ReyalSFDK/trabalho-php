@@ -93,4 +93,13 @@ Class DBConnection {
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         return $stmt;
     }
+
+    public function getPrepare( $sql ) {
+        $stmt = $this->dbc->prepare( $sql );
+        if (!$stmt) {
+            die(var_export($this->dbc->errorinfo(), TRUE));
+        }
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        return $stmt;
+    }
 }

@@ -15,8 +15,9 @@ class RepositorioTipoCarro extends RepositorioBase {
     public function selectAllTipoCarro() {
         // Faz a consulta no banco e pega o todos os tipos de carro
         $sql = "SELECT * FROM tipo_carro";
-        $result = $this->dbConnection->getQuery($sql);
-
+        $result = $this->dbConnection->dbc->prepare($sql);
+        $result->setFetchMode(PDO::FETCH_OBJ);
+        $result->execute();
         $tipo_carro = [];
         foreach ($result as $databaseData) {
             $tipo_carro[] = TipoCarro::getDatabaseTipoCarro($databaseData);
@@ -25,12 +26,26 @@ class RepositorioTipoCarro extends RepositorioBase {
         return $tipo_carro;
     }
 
+    public function selectTipoCarro($id) {
+
+        $query = $this->dbConnection->getPrepare("SELECT * FROM tipo_carro WHERE id=?");
+        //$query = $this->dbConnection->getPrepare($sql);
+        $query->execute([$id]);
+        $user = $query->fetch();
+
+//        $result = $this->dbConnection->runQuery($query);
+        var_dump($user);
+
+
+        return TipoCarro::getDatabaseTipoCarro($user);
+    }
+
     public function createTipoCarro(TipoCarro $tipo_carro) {
         $sql = "
             INSERT INTO tipo_carro (nome)
             VALUES (?)
         ";
-        $query = $this->dbConnection->dbc->query($sql);
+        $query = $this->dbConnection->dbc->prepare($sql);
         $query->bindParam(1, $tipo_carro->getNome());
 
 
