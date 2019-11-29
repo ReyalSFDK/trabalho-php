@@ -41,18 +41,25 @@ class RepositorioCliente extends RepositorioBase {
     }
 
     public function createCliente(Cliente $cliente) {
+        
+        $cliente_nome = $cliente->getNome();
+        $cliente_email = $cliente->getEmail();
+        $cliente_cpf = $cliente->getCpf();
+        $cliente_telefone = $cliente->getTelefone();
+
         $sql = "
             INSERT INTO cliente (nome, email, cpf, telefone)
             VALUES (?, ?, ?, ?)
         ";
-        $query = $this->dbConnection->dbc->query($sql);
-        $query->bindParam(1, $cliente->getNome());
-        $query->bindParam(2, $cliente->getEmail());
-        $query->bindParam(3 ,$cliente->getCpf());
-        $query->bindParam(4, $cliente->getTelefone());
+        $query = $this->dbConnection->dbc->prepare($sql);
+        $query->bindParam(1, $cliente_nome);
+        $query->bindParam(2, $cliente_email);
+        $query->bindParam(3 ,$cliente_cpf);
+        $query->bindParam(4, $cliente_telefone);
 
         $query->execute();
-        $this->dbConnection->runQuery($query);
+        //$this->dbConnection->runQuery($query);
+
     }
 
     public function updateCliente(Cliente $cliente) {
