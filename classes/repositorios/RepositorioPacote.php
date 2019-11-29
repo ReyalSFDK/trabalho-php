@@ -15,7 +15,9 @@ class RepositorioPacote extends RepositorioBase {
     public function selectAllPacote() {
         // Faz a consulta no banco e pega o pacote com suas relações
         $sql = "SELECT * FROM pacote";
-        $result = $this->dbConnection->getQuery($sql);
+        $result = $this->dbConnection->dbc->prepare($sql);
+        $result->setFetchMode(PDO::FETCH_OBJ);
+        $result->execute();
 
         $pacotes = [];
         foreach ($result as $databaseData) {
@@ -27,15 +29,14 @@ class RepositorioPacote extends RepositorioBase {
 
     public function selectPacote($id) {
         $sql = "SELECT * FROM pacote WHERE id = ?";
-        $query = $this->dbConnection->getQuery($sql);
+        $query = $this->dbConnection->getPrepare($sql);
 
         $query->bindParam(1, $id);
-        
-        $result = $this->dbConnection->runQuery($query);
+        $query->execute();
+        $pacote = $query->fetch();
 
-        $pacote = Pacote::getDatabasePacote($result);
+        return Pacote::getDatabasePacote($pacote);
 
-        return $pacote;
     }
 
     public function createPacote(Pacote $pacote) {
