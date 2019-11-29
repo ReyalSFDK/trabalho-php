@@ -15,7 +15,9 @@ class RepositorioPacote extends RepositorioBase {
     public function selectAllPacote() {
         // Faz a consulta no banco e pega o pacote com suas relações
         $sql = "SELECT * FROM pacote";
-        $result = $this->dbConnection->getQuery($sql);
+        $result = $this->dbConnection->dbc->prepare($sql);
+        $result->setFetchMode(PDO::FETCH_OBJ);
+        $result->execute();
 
         $pacotes = [];
         foreach ($result as $databaseData) {
@@ -27,30 +29,34 @@ class RepositorioPacote extends RepositorioBase {
 
     public function selectPacote($id) {
         $sql = "SELECT * FROM pacote WHERE id = ?";
-        $query = $this->dbConnection->getQuery($sql);
+        $query = $this->dbConnection->getPrepare($sql);
 
         $query->bindParam(1, $id);
-        
-        $result = $this->dbConnection->runQuery($query);
+        $query->execute();
+        $pacote = $query->fetch();
 
-        $pacote = Pacote::getDatabasePacote($result);
+        return Pacote::getDatabasePacote($pacote);
 
-        return $pacote;
     }
 
     public function createPacote(Pacote $pacote) {
-        $sql = "
-            INSERT INTO pacote (nome, valor, periodo, id_tipo)
-            VALUES (?, ?, ?, ?)
-        ";
-        $query = $this->dbConnection->dbc->query($sql);
-        $query->bindParam(1, $pacote->getNome());
-        $query->bindParam(2, $pacote->getValor());
-        $query->bindParam(3 ,$pacote->getPeriodo());
-        $query->bindParam(4, 1);
+        
+        $pacote_nome = $pacote->getNome();
+        $pacote_valor = $pacote->getValor();
+        $pacote_periodo = $pacote->getPeriodo();
+        $query = $this->dbConnection->dbc->prepare("
+            INSERT INTO pacote (nome, valor, periodo)
+            VALUES (?, ?, ?)
+        ");
+        //$query = $this->dbConnection->dbc->query($sql);
+        $query->bindParam(1, $pacote_nome);
+        $query->bindParam(2, $pacote_valor);
+        $query->bindParam(3 ,$pacote_periodo);
+        //$query->bindParam(4, 1);
 
         $query->execute();
-        $this->dbConnection->runQuery($query);
+        //$this->dbConnection->runQuery($query);
+
     }
 
     public function updatePacote(Pacote $pacote) {

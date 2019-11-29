@@ -7,7 +7,7 @@ require_once("classes/entidades/Pacote.php");
 $core = $bootstrap->getCore();
 
 // Repositories
-//// Pega todos os pacotes
+//// RepositorioPacote
 $pacoteRepository = $bootstrap->getRepositorioPacote();
 
 $nome = $_POST["nome"] ?? "";
@@ -19,9 +19,23 @@ $pacote_entity = new Pacote();
 $pacote_entity->setNome($nome);
 $pacote_entity->setValor($valor);
 $pacote_entity->setPeriodo($periodo);
-$pacoteRepository->createPacote($pacote_entity);
 
-$carro_tipo_all = selectAllTipoCarro();
+var_dump($pacote_entity);
+// RepositorioTipoCarro
+$carroRepository = $bootstrap->getRepositorioTipoCarro();
+
+$carro_tipo_all = $carroRepository->selectAllTipoCarro();
+
+$alert = null;
+$erro = $pacote_entity->validate();
+if (!$erro) {
+    $pacoteRepository->createPacote($pacote_entity);
+    $alert = "Pacote criado";
+} else {
+    $alert = $erro;
+}
+
+
 
 echo $core->setHeader("Inicio");
 ?>
@@ -43,21 +57,27 @@ echo $core->setHeader("Inicio");
 <div class="card">
     <h5 class="card-header">Cadastrar pacote</h5>
     <div class="card-body">
-
+        <?php
+        if ($alert) {
+            ?>
+            <div class="alert alert-light"><?=$alert?></div>
+            <?php
+        }
+        ?>
 <form method="POST" >
     <div class="form-group">
     <label for="nome">Nome: </label>
-    <input class="form-control" type="text" name="nome" id="nome" value<?=$carro_entity->getNome();?> placeholder="Digite o nome do pacote"><br><br>
+    <input class="form-control" type="text" name="nome" id="nome" value<?=$pacote_entity->getNome();?> placeholder="Digite o nome do pacote"><br><br>
     </div>
 
     <div class="form-group">
     <label for="valor">Valor: </label>
-    <input class="form-control" type="number" name="valor" id="valor" value<?= $carro_entity->getValor();?> placeholder="Digite o valor do pacote"><br><br>
+    <input class="form-control" type="text" name="valor" id="valor" value<?= $pacote_entity->getValor();?> placeholder="Digite o valor do pacote"><br><br>
     </div>
 
     <div class="form-group">
     <label>periodo: </label>
-    <input class="form-control" type="number" name="periodo" value<?= $carro_entity->getPeriodo();?> placeholder="Digite a quantidade de dias do periodo"><br><br>
+    <input class="form-control" type="text" name="periodo" value<?= $pacote_entity->getPeriodo();?> placeholder="Digite a quantidade de dias do periodo"><br><br>
     </div>
 
 
@@ -68,10 +88,3 @@ echo $core->setHeader("Inicio");
 </body>
 </html>
 
-<?php
-$pacote_entity = new Pacote();
-$pacote_entity->setNome($_POST["nome"]);
-$pacote_entity->setValor($_POST["valor"]);
-$pacote_entity->setPeriodo($_POST["periodo"]);
-$pacoteRepository->createPacote($pacote_entity);
-?>
