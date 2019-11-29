@@ -14,6 +14,7 @@ $tipoCarroRepository = $bootstrap->getRepositorioTipoCarro();
 
 $tiposCarro = $tipoCarroRepository->selectAllTipoCarro();
 
+
 $nome = $_POST["nome"] ?? "";
 $marca = $_POST["marca"] ?? "";
 $imagem = $_POST["imagem"] ?? "";
@@ -41,7 +42,7 @@ if (!$erro) {
     $alert = $erro;
 }
 
-var_dump($carro_entity);
+//var_dump($carro_entity);
 echo $core->setHeader("Inicio");
 
 

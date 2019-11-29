@@ -31,29 +31,33 @@ class RepositorioTipoCarro extends RepositorioBase {
         $query = $this->dbConnection->getPrepare("SELECT * FROM tipo_carro WHERE id=?");
         //$query = $this->dbConnection->getPrepare($sql);
         $query->execute([$id]);
-        $user = $query->fetch();
+        $tipo_carro = $query->fetch();
 
 //        $result = $this->dbConnection->runQuery($query);
-        var_dump($user);
+        ///var_dump($tipo_carro);
 
 
-        return TipoCarro::getDatabaseTipoCarro($user);
+        return TipoCarro::getDatabaseTipoCarro($tipo_carro);
     }
 
     public function createTipoCarro(TipoCarro $tipo_carro) {
+
+        $tipo_nome = $tipo_carro->getNome();
         $sql = "
             INSERT INTO tipo_carro (nome)
             VALUES (?)
         ";
         $query = $this->dbConnection->dbc->prepare($sql);
-        $query->bindParam(1, $tipo_carro->getNome());
+        $query->bindParam(1,$tipo_nome );
 
 
         $query->execute();
-        $this->dbConnection->runQuery($query);
+        //$this->dbConnection->runQuery($query);
     }
 
     public function updateTipoCarro(TipoCarro $tipo_carro) {
+        $tipo_carro_nome = $tipo_carro->getNome();
+        $tipo_carro_id = $tipo_carro->getId();
         $sql = "
             UPDATE tipo_carro SET
                 nome = ?
@@ -61,8 +65,9 @@ class RepositorioTipoCarro extends RepositorioBase {
                 id = ?
         ";
 
-        $query = $this->dbConnection->dbc->query($sql);
-        $query->bindParam(1,$tipo_carro->getNome());
+        $query = $this->dbConnection->dbc->prepare($sql);
+        $query->bindParam(1,$tipo_carro_nome);
+        $query->bindParam(2,$tipo_carro_id);
         $query->execute();
         //var_dump($sql);
 
