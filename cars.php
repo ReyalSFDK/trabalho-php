@@ -8,7 +8,7 @@ $core = $bootstrap->getCore();
 // Repositories
 //// Pega todos os pacotes
 $pacoteRepository = $bootstrap->getRepositorioPacote();
-$pacotes = $pacoteRepository->selectPacote();
+$pacotes = $pacoteRepository->selectPacote("01");
 
 // Setar o cabeçalho
 echo $core->setHeader("Inicio");
