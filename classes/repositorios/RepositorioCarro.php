@@ -40,7 +40,7 @@ class RepositorioCarro extends RepositorioBase {
         }
 
     /**
-     * Retorna todos os tipos de carro do banco
+     * Retorna todos os carros dentro de um pacote
      *
      * @return Carro[]
      */
@@ -62,10 +62,8 @@ class RepositorioCarro extends RepositorioBase {
                 pacote.id = ?
         ";
 
-        $query = $this->dbConnection->dbc->prepare($sql);
-        $query->bindParam(1, $pacote->getId());
-        $query->execute();
-        $query->setFetchMode(PDO::FETCH_OBJ);
+        $query = $this->dbConnection->dbc->getPrepare($sql);
+        $query->execute([$pacote->getId()]);
 
         $carros = [];
         foreach ($query as $databaseData) {
@@ -79,23 +77,21 @@ class RepositorioCarro extends RepositorioBase {
         $carro_nome = $carro->getNome();
         $carro_marca = $carro->getMarca();
         $carro_imagem = $carro->getImagem();
+        $carro_ano = $carro->getAno();
         $carro_tipocarro = $carro->getTipoCarro()->getId();
 
-        //AVISO: falta ser passado o id_tipo para essa query.
-        $query = $this->dbConnection->dbc->prepare("
-        INSERT INTO carro (nome, marca, imagem, id_tipo)
-        VALUES (?, ?, ?, ?)
+        $query = $this->dbConnection->dbc->getPrepare("
+            INSERT INTO carro (nome, marca, imagem, ano, id_tipo)
+            VALUES (?, ?, ?, ?, ?)
         ");
-        
-        //$query = $this->dbConnection->dbc->query($sql);
-        
-        $query->bindParam(1, $carro_nome);
-        $query->bindParam(2, $carro_marca);
-        $query->bindParam(3, $carro_imagem);
-        $query->bindParam(4, $carro_tipocarro);
 
-        $query->execute();
-        //$this->dbConnection->runQuery($query->queryString());
+        $query->execute([
+            $carro_nome,
+            $carro_marca,
+            $carro_image,
+            $carro_ano,
+            $carro_tipocarro
+        ]);
     }
 
     public function updateCarro(Carro $carro) {
@@ -103,32 +99,35 @@ class RepositorioCarro extends RepositorioBase {
         UPDATE carro SET
             nome = ?,
             marca = ?,
-            imagem = ?
+            imagem = ?,
+            ano = ?,
+            id_tipo = ?
+
         WHERE
             id = ?
     ";
 
-        $query = $this->dbConnection->dbc->query($sql);
-        $query->bindParam(1,$carro->getNome());
-        $query->bindParam(2,$carro->getMarca());
-        $query->bindParam(3,$carro->getImagem());
-        $query->bindParam(4,$carro->getId());
-        $query->execute();
-        //var_dump($sql);
+        $query = $this->dbConnection->dbc->getPrepare($sql);
+
+        $query->execute([
+            $carro->getNome(),
+            $carro->getMarca(),
+            $carro->getImagem(),
+            $carro->getAno(),
+            $carro->getTipoCarro()->getId(),
+            $carro->getId()
+        ]);
 
     }
 
     public function deleteCarro(Carro $carro) {
-        //print_r($carro);
         $sql = "
-        DELETE FROM carro 
-        WHERE id = ?
+            DELETE FROM carro 
+            WHERE id = ?
+        ";
 
-    ";
-        $query = $this->dbConnection->dbc->query($sql);
-        $query->bindParam(1, $carro->getId());
-        $query->execute();
-        //var_dump($sql);
+        $query = $this->dbConnection->dbc->getPrepare($sql);
+        $query->execute([$carro->getId()]);
 
     }
 }
