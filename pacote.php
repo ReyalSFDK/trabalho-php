@@ -37,8 +37,8 @@ echo $core->getNavBar();
 <div class="container" style="margin-top:35px;">
     <div class="row">
       <div class="col-12">
-        <div class="card">
-          <h4 class="card-header text-bold"><?=$pacote->getNome()?></h4>
+        <div class="card bg-primary">
+          <h4 class="card-header text-bold text-white"><?=$pacote->getNome()?></h4>
           <ul class="list-group list-group-flush">
             <li
               class="list-group-item"

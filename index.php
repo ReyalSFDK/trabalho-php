@@ -15,7 +15,18 @@ echo $core->setHeader("Inicio");
 echo $core->getNavBar();
 ?>
 
-<div class="container my-5">
+<div class="container my-4">
+    <div class="row my-3 d-flex align-items-center">
+        <h4 class="col-8">
+            Atualmente, temos <?=count($pacotes)?> planos disponíveis!
+        </h4>
+        <a
+            href="pesquisa.html"
+            class="col-4 btn btn-link text-center"
+        >
+            Ver meus alugueis
+        </a>
+    </div>
     <div class="row">
         <?php
             foreach ($pacotes as $pacote) {
