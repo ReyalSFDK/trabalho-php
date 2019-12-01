@@ -1,13 +1,13 @@
 <?php
+ require_once("../classes/DBConnection.php");
+
 /**
  * Teste para verificar se a função que retorna a classe de conexão de banco de dados
- * retorna uma instância unica do banco.
+ * retorna uma instância.
  *
  * Devido a falta de uso do autoload, uma copia da classe Bootstrap foi criada 
  * somente co os dados que precisamos para realizar o teste
  */
-require_once("../classes/DBConnection.php");
-
 class DatabaseTest {
     /**
      * Dados de aceso ao banco de dados
