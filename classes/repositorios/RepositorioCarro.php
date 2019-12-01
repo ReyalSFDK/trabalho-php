@@ -62,12 +62,12 @@ class RepositorioCarro extends RepositorioBase {
                 pacote.id = ?
         ";
 
-        $query = $this->dbConnection->dbc->getPrepare($sql);
+        $query = $this->dbConnection->getPrepare($sql);
         $query->execute([$pacote->getId()]);
 
         $carros = [];
         foreach ($query as $databaseData) {
-            $carros[] = Carro::getDatabasePacote($databaseData);
+            $carros[] = Carro::getDatabaseCarro($databaseData);
         }
 
         return $carros;

@@ -153,7 +153,7 @@ class Carro {
         $carro->setNome($databaseData->nome);
         $carro->setMarca($databaseData->marca);
         $carro->setAno($databaseData->ano);
-        $carro->setImagem($databaseData->image);
+        $carro->setImagem($databaseData->image ?? "");
 
         if ($databaseData->id) {
             $carro->id = $databaseData->id;
