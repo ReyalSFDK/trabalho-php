@@ -80,7 +80,7 @@ class RepositorioCarro extends RepositorioBase {
         $carro_ano = $carro->getAno();
         $carro_tipocarro = $carro->getTipoCarro()->getId();
 
-        $query = $this->dbConnection->dbc->getPrepare("
+        $query = $this->dbConnection->getPrepare("
             INSERT INTO carro (nome, marca, imagem, ano, id_tipo)
             VALUES (?, ?, ?, ?, ?)
         ");
@@ -88,7 +88,7 @@ class RepositorioCarro extends RepositorioBase {
         $query->execute([
             $carro_nome,
             $carro_marca,
-            $carro_image,
+            $carro_imagem,
             $carro_ano,
             $carro_tipocarro
         ]);
@@ -107,7 +107,7 @@ class RepositorioCarro extends RepositorioBase {
             id = ?
     ";
 
-        $query = $this->dbConnection->dbc->getPrepare($sql);
+        $query = $this->dbConnection->getPrepare($sql);
 
         $query->execute([
             $carro->getNome(),
@@ -126,7 +126,7 @@ class RepositorioCarro extends RepositorioBase {
             WHERE id = ?
         ";
 
-        $query = $this->dbConnection->dbc->getPrepare($sql);
+        $query = $this->dbConnection->getPrepare($sql);
         $query->execute([$carro->getId()]);
 
     }
