@@ -33,10 +33,12 @@ class RepositorioCliente extends RepositorioBase {
     public function getClienteByCPF(string $cpf) {
         // Faz a consulta no banco e pega todos os clientes
         $sql = "SELECT * FROM cliente WHERE cpf = ?";
-        $query = $this->dbConnection->dbc->query($sql);
+        $query = $this->dbConnection->getPrepare($sql);
         $query->bindParam(1, $cpf);
 
-        $result = $this->dbConnection->runQuery($query);
+        $result = $query->execute();
+
+        //$result = $this->dbConnection->runQuery($query);
 
         if ($result) {
             return Cliente::getDatabaseCliente($result);
@@ -56,7 +58,7 @@ class RepositorioCliente extends RepositorioBase {
             INSERT INTO cliente (nome, email, cpf, telefone)
             VALUES (?, ?, ?, ?)
         ";
-        $query = $this->dbConnection->dbc->prepare($sql);
+        $query = $this->dbConnection->getPrepare($sql);
         $query->bindParam(1, $cliente_nome);
         $query->bindParam(2, $cliente_email);
         $query->bindParam(3 ,$cliente_cpf);
@@ -79,7 +81,7 @@ class RepositorioCliente extends RepositorioBase {
                 id = ?
         ";
 
-        $query = $this->dbConnection->dbc->query($sql);
+        $query = $this->dbConnection->getPrepare($sql);
         $query->bindParam(1,$cliente->getNome());
         $query->bindParam(2,$cliente->getEmail());
         $query->bindParam(3,$cliente->getCpf());
@@ -96,7 +98,7 @@ class RepositorioCliente extends RepositorioBase {
             WHERE id = ?
     
         ";
-        $query = $this->dbConnection->dbc->query($sql);
+        $query = $this->dbConnection->getPrepare($sql);
         $query->bindParam(1, $cliente->getId());
         $query->execute();
         //var_dump($sql);
