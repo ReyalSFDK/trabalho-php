@@ -73,8 +73,7 @@ CREATE TABLE `cliente` (
     `nome` varchar(50) NOT NULL,
     `email` varchar(25) NOT NULL,
     `cpf` varchar(11) NOT NULL,
-    `telefone` varchar(11) NOT NULL,
-    `id_pacote` int(99) DEFAULT NULL
+    `telefone` varchar(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 insert into periodo

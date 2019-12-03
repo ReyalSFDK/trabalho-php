@@ -44,7 +44,7 @@ class RepositorioPacote extends RepositorioBase {
         $pacote_nome = $pacote->getNome();
         $pacote_valor = $pacote->getValor();
         $pacote_periodo = $pacote->getPeriodo();
-        $query = $this->dbConnection->getPrepare("
+            $query = $this->dbConnection->getPrepare("
             INSERT INTO pacote (nome, valor, periodo)
             VALUES (?, ?, ?)
         ");
