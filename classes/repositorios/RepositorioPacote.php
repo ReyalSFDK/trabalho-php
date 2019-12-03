@@ -15,7 +15,7 @@ class RepositorioPacote extends RepositorioBase {
     public function selectAllPacote() {
         // Faz a consulta no banco e pega o pacote com suas relações
         $sql = "SELECT * FROM pacote";
-        $result = $this->dbConnection->dbc->prepare($sql);
+        $result = $this->dbConnection->getPrepare($sql);
         $result->setFetchMode(PDO::FETCH_OBJ);
         $result->execute();
 
@@ -44,7 +44,7 @@ class RepositorioPacote extends RepositorioBase {
         $pacote_nome = $pacote->getNome();
         $pacote_valor = $pacote->getValor();
         $pacote_periodo = $pacote->getPeriodo();
-        $query = $this->dbConnection->dbc->prepare("
+        $query = $this->dbConnection->getPrepare("
             INSERT INTO pacote (nome, valor, periodo)
             VALUES (?, ?, ?)
         ");
@@ -69,7 +69,7 @@ class RepositorioPacote extends RepositorioBase {
                 id = ?
         ";
 
-        $query = $this->dbConnection->dbc->query($sql);
+        $query = $this->dbConnection->getPrepare($sql);
         $query->bindParam(1,$pacote->getNome());
         $query->bindParam(2,$pacote->getValor());
         $query->bindParam(3,$pacote->getPeriodo());
@@ -86,7 +86,7 @@ class RepositorioPacote extends RepositorioBase {
             WHERE id = ?
     
         ";
-        $query = $this->dbConnection->dbc->query($sql);
+        $query = $this->dbConnection->getPrepare($sql);
         $query->bindParam(1, $pacote->getId());
         $query->execute();
         //var_dump($sql);

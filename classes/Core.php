@@ -26,4 +26,13 @@ class Core extends Singleton {
                 <title>'. $title.'</title>
             </head>';
     }
+
+    public function getNavBar() {
+        return '
+            <nav class="navbar navbar-dark bg-dark" style="display: flex; justify-content: center;">
+                <a href="index.php">
+                    <img src="https://imagensemoldes.com.br/wp-content/uploads/2018/01/Logo-Filme-Carros-01.png" alt="" width=50px heigth=50px>
+                </a>
+            </nav>';
+    }
 }

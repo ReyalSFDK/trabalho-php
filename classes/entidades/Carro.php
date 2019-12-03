@@ -23,6 +23,11 @@ class Carro {
     private $imagem;
 
     /**
+     * @var string
+     */
+    private $ano;
+
+    /**
      * @var TipoCarro
      */
     private $tipoCarro;
@@ -88,6 +93,24 @@ class Carro {
     }
 
     /**
+     * @return string
+     */
+    public function getAno(): string
+    {
+        return $this->ano;
+    }
+
+    /**
+     * @param string $ano
+     * @return Carro
+     */
+    public function setAno(string $ano): Carro
+    {
+        $this->ano = $ano;
+        return $this;
+    }
+
+    /**
      * @return TipoCarro
      */
     public function getTipoCarro(): TipoCarro
@@ -128,6 +151,9 @@ class Carro {
     static function getDatabaseCarro(stdClass $databaseData): self {
         $carro = new Carro();
         $carro->setNome($databaseData->nome);
+        $carro->setMarca($databaseData->marca);
+        $carro->setAno($databaseData->ano);
+        $carro->setImagem($databaseData->image ?? "");
 
         if ($databaseData->id) {
             $carro->id = $databaseData->id;

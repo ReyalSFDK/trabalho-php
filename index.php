@@ -12,12 +12,21 @@ $pacotes = $pacoteRepository->selectAllPacote();
 
 // Setar o cabeçalho
 echo $core->setHeader("Inicio");
-
+echo $core->getNavBar();
 ?>
-<nav class="navbar navbar-dark bg-dark" style="display: flex; justify-content: center;">
-    <img src="https://imagensemoldes.com.br/wp-content/uploads/2018/01/Logo-Filme-Carros-01.png" alt="" width=50px heigth=50px>
-</nav>
-<div class="container my-5">
+
+<div class="container my-4">
+    <div class="row my-3 d-flex align-items-center">
+        <h4 class="col-8">
+            Atualmente, temos <?=count($pacotes)?> planos disponíveis!
+        </h4>
+        <a
+            href="pesquisa.html"
+            class="col-4 btn btn-link text-center"
+        >
+            Ver meus alugueis
+        </a>
+    </div>
     <div class="row">
         <?php
             foreach ($pacotes as $pacote) {
@@ -26,11 +35,22 @@ echo $core->setHeader("Inicio");
                     <div class="card border-dark">
                         <div class="card-body">
                             <h4 class="card-title text-dark font-weight-bold"><?=$pacote->getNome()?></h4>
-                            <p class="card-text text-italic">R$ <?=$pacote->getValor()?></p>
-                            <p class="card-text"><?=$pacote->getPeriodo()?></p>
+                            <div class="row px-3 pt-3 d-flex justify-content-between">
+                                <h5 class="card-text text-italic text-success text-bold">
+                                    R$ <?=$pacote->getValor()?>
+                                </h5>
+                                <h5 class="card-text text-info">
+                                    <?=$pacote->getPeriodo()?>
+                                </h5>
+                            </div>
                         </div>
                         <ul class="list-group">
-                            <li class="list-group-item list-group-item-action list-group-item-success text-center h4">Escolha seu veiculo</li>
+                            <a
+                                class="list-group-item list-group-item-action list-group-item-success text-center h4"
+                                href="pacote.php?pacote=<?=$pacote->getID()?>"
+                            >
+                                Escolha seu veiculo
+                            </a>
                         </ul>
                     </div>
                 </div>
