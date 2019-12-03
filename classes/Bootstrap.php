@@ -80,6 +80,8 @@ class Bootstrap {
 
 
 
+
+
     public function getCore() {
         $core = Core::getInstance();
         return $core;

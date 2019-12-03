@@ -25,11 +25,11 @@ class TipoCarro {
     }
 
     public function validate() {
-        if (len($this->nome) < 0 || empty($this->nome)) {
+        if (strlen($this->nome) < 0 || empty($this->nome)) {
             return "O nome não pode ser vazio";
         }
-        if (len($this->nome) > 30) {
-            return "O nome é mair que 30";
+        if (strlen($this->nome) > 30) {
+            return "O nome é maior que 30";
         }
 
         return null;

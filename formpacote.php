@@ -2,6 +2,7 @@
 // Bootstrap
 require_once("classes/Bootstrap.php");
 // Entidades
+
 require_once("classes/entidades/Pacote.php");
 // Core
 $core = $bootstrap->getCore();
@@ -20,9 +21,10 @@ $pacote_entity->setNome($nome);
 $pacote_entity->setValor($valor);
 $pacote_entity->setPeriodo($periodo);
 
-var_dump($pacote_entity);
+
 // RepositorioTipoCarro
 $carroRepository = $bootstrap->getRepositorioTipoCarro();
+
 
 $carro_tipo_all = $carroRepository->selectAllTipoCarro();
 
@@ -75,8 +77,9 @@ echo $core->setHeader("Inicio");
     <input class="form-control" type="text" name="valor" id="valor" value<?= $pacote_entity->getValor();?> placeholder="Digite o valor do pacote"><br><br>
     </div>
 
+
     <div class="form-group">
-    <label>periodo: </label>
+    <label>Periodo: </label>
     <input class="form-control" type="text" name="periodo" value<?= $pacote_entity->getPeriodo();?> placeholder="Digite a quantidade de dias do periodo"><br><br>
     </div>
 

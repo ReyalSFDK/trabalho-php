@@ -1,9 +1,12 @@
 <?php
 // Bootstrap
 require_once("./classes/Bootstrap.php");
+// Entidades
+
 
 // Core
 $core = $bootstrap->getCore();
+
 
 // Setar o cabeçalho
 echo $core->setHeader("Inicio");
@@ -28,12 +31,12 @@ echo $core->setHeader("Inicio");
         </div>
         <div class="form-group">
             <label>Cartão</label>
-            <input type="text" class="form-control" placeholder="4000000000000000000000000">
+            <input type="text" class="form-control" placeholder="4000 0000 0000 0010">
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label>CPF</label>
-                <input type="text" class="form-control" placeholder="02558558525">
+                <input type="text" class="form-control" placeholder="digite o numero do seu cpf">
             </div>
             <div class="form-group col-md-6">
                 <label>Telefone</label>

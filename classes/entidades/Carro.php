@@ -133,6 +133,10 @@ class Carro {
             return "Você não fez o upload da imagem";
         }
 
+        if (empty($this->ano)){
+            return "Insira o ano";
+        }
+
         return null;
     }
 
