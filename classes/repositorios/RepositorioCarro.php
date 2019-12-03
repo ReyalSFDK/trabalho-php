@@ -120,6 +120,24 @@ class RepositorioCarro extends RepositorioBase {
 
     }
 
+    public function selectCarro(string $carro_id) {
+        $sql = "
+        SELECT * FROM
+            carro
+        WHERE
+            id = ?
+    ";
+
+        $query = $this->dbConnection->getPrepare($sql);
+
+        $query->execute([$carro_id]);
+        $result = $query->fetch();
+
+        $carro =  Carro::getDatabaseCarro($result);
+        $carro->setTipoCarro($this->repositorioTipoCarro->selectTipoCarro($result->id_tipo));
+        return $carro;
+    }
+
     public function deleteCarro(Carro $carro) {
         $sql = "
             DELETE FROM carro 

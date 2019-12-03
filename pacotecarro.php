@@ -1,8 +1,25 @@
 <?php
 // Bootstrap
 require_once("./classes/Bootstrap.php");
+
+$id_pacote = $_GET["pacote"] ?? null;
+$id_carro = $_GET["carro"] ?? null;
+
 // Core
 $core = $bootstrap->getCore();
+
+// Repositorios
+$repositorioCarro = $bootstrap->getRepositorioCarro();
+$repositorioPacote = $bootstrap->getRepositorioPacote();
+
+if (!$id_pacote && !$id_carro) {
+    header("Location: index.php");
+}
+
+$carro = $repositorioCarro->selectCarro($id_carro);
+$pacote = $repositorioPacote->selectPacote($id_pacote);
+
+
 // Setar o cabeçalho
 echo $core->setHeader("Inicio");
 ?>
@@ -11,21 +28,35 @@ echo $core->setHeader("Inicio");
          heigth=50px>
 </nav>
 
-<div class="container" style="margin-top:35px;">
-        <div class="form-group">
-            <label>Plano</label>
-            <span class="input-group-text" id="inputGroup-sizing-default">Premium</span>
+<div class="container p-5">
+        <h3 class="mb-4">Dados do Aluguel</h3>
+        <div class="row">
+            <div class="form-group col-6">
+                <label>Plano</label>
+                <span class="input-group-text" id="inputGroup-sizing-default"><?=$pacote->getNome()?></span>
+            </div>
+            <div class="form-group col-6">
+                <label>Preço do pacote</label>
+                <span class="input-group-text" id="inputGroup-sizing-default">R$: <?=$pacote->getValor()?></span>
+            </div>
         </div>
-        <div class="form-group">
-            <label>Tipo</label>
-            <span class="input-group-text" id="inputGroup-sizing-default">SUV</span>
-        </div>
-        <div class="form-group">
-            <label>Preço do pacote</label>
-            <span class="input-group-text" id="inputGroup-sizing-default">100 reais</span>
+        <div class="row">
+            <div class="form-group col-6">
+                <div class="form-group">
+                    <label>Carro</label>
+                    <span class="input-group-text" id="inputGroup-sizing-default"><?=$carro->getNome()?></span>
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <div class="form-group">
+                    <label>Tipo</label>
+                    <span class="input-group-text" id="inputGroup-sizing-default"><?=$carro->getTipoCarro()->getNome()?></span>
+                </div>
+            </div>
         </div>
 
         <form>
+            <h4 class="mb-4">Confirme seus dados</h4    >
             <div class="form-group">
                 <label>Nome</label>
                 <input type="name" class="form-control" placeholder="Ex Pen Blue">
@@ -49,6 +80,6 @@ echo $core->setHeader("Inicio");
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Entrar</button>
+            <button type="submit" class="btn btn-primary">Alugar</button>
         </form>
 </div>
