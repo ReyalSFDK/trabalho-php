@@ -63,7 +63,7 @@ echo $core->getNavBar();
                     </h5>
                     <a
                       class="col-2 btn btn-success"
-                      href="compra?pacote=<?=$pacote->getId()?>&carro=<?=$carro->getId()?>"
+                      href="pacotecarro.php?pacote=<?=$pacote->getId()?>&carro=<?=$carro->getId()?>"
                     >
                       comprar
                     </a>

@@ -4,8 +4,22 @@ require_once("RepositorioBase.php");
 
 // Entidades
 require_once("classes/entidades/Cliente.php");
+require_once("classes/entidades/Carro.php");
+require_once("classes/entidades/Pacote.php");
 
 class RepositorioCliente extends RepositorioBase {
+
+    public function createCompra(Cliente $cliente, string $carroPacote) {
+        $id_cliente = $cliente->getId();
+
+        $sql = "
+            INSERT INTO compra_cliente (id_cliente, id_carro_pacote)
+            VALUES (?, ?)
+        ";
+
+        $query = $this->dbConnection->getPrepare($sql);
+        $query->execute([$id_cliente, $carroPacote]);
+    }
 
     /**
      * Retorna todos os tipos de carro do banco
